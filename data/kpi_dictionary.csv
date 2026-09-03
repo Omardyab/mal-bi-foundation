@@ -1,0 +1,21 @@
+metric_name,domain,owner,status,refresh_cadence
+Active Customers,Enterprise,BI / Product,Certified,Daily
+Total Customers,Enterprise,BI / Product,Certified,Daily
+Monthly Revenue,Finance,Finance,Certified,Daily
+Revenue per Active Customer,Finance,Finance,Certified,Daily
+Payment Volume,Payments,Payments,Certified,Daily
+Savings Balance,Savings,Savings,Certified,Daily
+Credit Originations,Credit,Credit,Certified,Daily
+Credit Outstanding Balance,Credit,Credit,Certified,Daily
+Credit Approval Rate,Credit,Credit,Certified,Daily
+Credit Funding Rate,Credit,Credit,Certified,Daily
+Credit Applications,Credit,Credit,Certified,Daily
+Average Approved Amount,Credit,Credit,Certified,Daily
+30+ DPD Rate,Credit,Credit,Certified,Daily
+Portfolio at Risk 30,Credit,Credit,Certified,Daily
+Average Risk Score,Credit,Credit,Certified,Daily
+Product Penetration,Product,Product,Certified,Daily
+Customer Retention Rate,Product,Product,Certified,Daily
+Contribution Margin,Finance,Finance,Certified,Daily
+Contribution Margin %,Finance,Finance,Certified,Daily
+High-Risk Portfolio Share,Credit,Credit,Certified,Daily
