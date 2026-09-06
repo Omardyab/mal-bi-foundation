@@ -1,21 +1,21 @@
-metric_name,domain,owner,status,refresh_cadence
-Active Customers,Enterprise,BI / Product,Certified,Daily
-Total Customers,Enterprise,BI / Product,Certified,Daily
-Monthly Revenue,Finance,Finance,Certified,Daily
-Revenue per Active Customer,Finance,Finance,Certified,Daily
-Payment Volume,Payments,Payments,Certified,Daily
-Savings Balance,Savings,Savings,Certified,Daily
-Credit Originations,Credit,Credit,Certified,Daily
-Credit Outstanding Balance,Credit,Credit,Certified,Daily
-Credit Approval Rate,Credit,Credit,Certified,Daily
-Credit Funding Rate,Credit,Credit,Certified,Daily
-Credit Applications,Credit,Credit,Certified,Daily
-Average Approved Amount,Credit,Credit,Certified,Daily
-30+ DPD Rate,Credit,Credit,Certified,Daily
-Portfolio at Risk 30,Credit,Credit,Certified,Daily
-Average Risk Score,Credit,Credit,Certified,Daily
-Product Penetration,Product,Product,Certified,Daily
-Customer Retention Rate,Product,Product,Certified,Daily
-Contribution Margin,Finance,Finance,Certified,Daily
-Contribution Margin %,Finance,Finance,Certified,Daily
-High-Risk Portfolio Share,Credit,Credit,Certified,Daily
+metric_name,domain,owner,business_definition,formula,data_source,refresh_cadence,status
+Active Customers,Product,Product Analytics,Unique customer with at least one qualifying product activity during the trailing 30 days,"COUNT_DISTINCT(customer_id) filtered to Payment, Savings Deposit, Savings Withdrawal, or Credit Repayment",customer_activity,Daily,Certified
+Total Customers,Product,Product Analytics,Total unique customers in the customer base,COUNT_DISTINCT(customer_id),customers,Daily,Certified
+Monthly Revenue,Finance,Finance Analytics,Total revenue generated during the selected calendar month,SUM(revenue),finance_transactions,Daily,Certified
+Revenue per Active Customer,Finance,Finance Analytics,Monthly revenue divided by certified active customers,Monthly Revenue / Certified Active Customers,finance_transactions + customer_activity,Daily,Certified
+Payment Volume,Product,Payments Analytics,Total value of payment activity during the selected period,SUM(amount) where activity_type = Payment,customer_activity,Daily,Certified
+Savings Balance ,Product,Savings Analytics,Total balance held in savings accounts,SUM(balance) where product_type = Savings,product_accounts,Daily,Certified
+Credit Originations,Credit,Credit Analytics,Total original amount of loans originated during the selected period,SUM(original_amount),credit_portfolio,Daily,Certified
+Credit Outstanding Balance,Credit,Credit Analytics,Total outstanding balance across the current credit portfolio,SUM(outstanding_balance),credit_portfolio,Daily,Certified
+Credit Approval Rate,Credit,Credit Analytics,Share of credit applications that were approved,COUNT_DISTINCT(application_id where approved = 1) / COUNT_DISTINCT(application_id),credit_applications,Daily,Certified
+Credit Funding Rate,Credit,Credit Analytics,Share of approved credit applications that were funded,COUNT_DISTINCT(application_id where funded = 1) / COUNT_DISTINCT(application_id where approved = 1),credit_applications,Daily,Certified
+Credit Applications,Credit,Credit Analytics,Total unique credit applications received during the selected period,COUNT_DISTINCT(application_id),credit_applications,Daily,Certified
+Average Approved Amount,Credit,Credit Analytics,Average approved loan amount among approved applications,AVG(approved_amount) where approved = 1,credit_applications,Daily,Certified
+30+ DPD Rate,Credit,Credit Risk,Percentage of loans that are 30 or more days past due,COUNT_DISTINCT(loan_id where days_past_due >= 30) / COUNT_DISTINCT(loan_id),credit_portfolio,Daily,Certified
+PAR30 — Portfolio at Risk 30,Credit,Credit Risk,Percentage of outstanding balance associated with loans that are 30 or more days past due,SUM(outstanding_balance where days_past_due >= 30) / SUM(outstanding_balance),credit_portfolio,Daily,Certified
+Average Risk Score,Credit,Credit Risk,Average risk score across credit applications,AVG(risk_score),credit_applications,Daily,Exploratory
+Product Penetration,Product,Product Analytics,Share of customers with at least one product account,COUNT_DISTINCT(customer_id in product_accounts) / COUNT_DISTINCT(customer_id in customers),product_accounts + customers,Daily,Certified
+Customer Retention Rate,Product,Product Analytics,Percentage of customers who remain active compared with the prior measurement period,Retained active customers / prior-period active customers,customer_activity,Monthly,Exploratory
+Contribution Margin,Finance,Finance Analytics,Revenue remaining after direct costs,SUM(revenue - cost),finance_transactions,Daily,Certified
+Contribution Margin %,Finance,Finance Analytics,Contribution margin expressed as a percentage of revenue,SUM(revenue - cost) / SUM(revenue),finance_transactions,Daily,Certified
+High-Risk Portfolio Share,Credit,Credit Risk,Share of outstanding credit balance held in the High or Very High risk bands,"SUM(outstanding_balance where risk_band IN ('High', 'Very High')) / SUM(outstanding_balance)",credit_portfolio,Daily,Certified
